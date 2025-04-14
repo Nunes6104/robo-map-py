@@ -9,61 +9,56 @@ def ler_mapa(nome_ficheiro):
             if len(elementos) == 10:
                 mapa.append(elementos)
     mapa[0][0] = 'R'
-    return mapa
-posX = 0
-posY = 0
-totalM = 0
+    return mapa        
 
-def moveUp(mapa):
-    #se existir o ponto trocar por R
-    if mapa[posX - 1][posY] == '.':
-        mapa[posX - 1][posY] = 'R'
-    #caso contrário damos erro e voltamos para trás
-    elif mapa[posX - 1][posY] == '#':
-        print("Existe um obstáculo!")
-    elif mapa[posX - 1][posY] == 'R':
-        print("Estás a voltar para trás!")
-    else:
-        print("Não podes sair do mapa!")
-
-def moveDown(mapa):
-    #se existir o ponto trocar por R
-    if mapa[posX + 1][posY] == '.':
-        mapa[posX + 1][posY] = 'R'
-    #caso contrário damos erro e voltamos para trás
-    elif mapa[posX + 1][posY] == '#':
-        print("Existe um obstáculo!")
-    elif mapa[posX + 1][posY] == 'R':
-        print("Estás a voltar para trás!")
-    else:
-        print("Não podes sair do mapa!")
-
-def menu():
-        mapa = ler_mapa("mapa.txt")
-            
-        while True:
+def menu(mapa):
+        posX = 0
+        posY = 0
+                    
+        while mapa[9][9] == ".":
             for linha in mapa:
                 print(' '.join(linha))
             
             print("\nEscolha uma opção W,A,S,D para mover o Robô \nOpção 0 para encerrar o programa")
             opcao = input("Escolha uma opção: ")
 
-            if opcao.lower() == "w":
-                moveUp(mapa)
-            elif opcao.lower() == "a":
-                #moveLeft(mapa)
-                print("Hello")
-            elif opcao.lower() == "s":   
-                moveDown(mapa) 
-            elif opcao.lower() == "d":
-                #moveRight(mapa) 
-                print("Hello")
-                      
+            if opcao.lower() == "w" and posX > 0:
+                posX -= 1
+                if mapa[posX][posY] == "#":
+                    print("\nFoste contra um obstáculo, tenta novamente1\n")
+                    posX += 1
+                else:
+                    mapa[posX][posY] = "R"
+                    
+            elif opcao.lower() == "s" and posX < 9:
+                posX += 1
+                if mapa[posX][posY] == "#":
+                    print("\nFoste contra um obstáculo, tenta novamente\n")
+                    posX -= 1
+                else:
+                    mapa[posX][posY] = "R"
+            elif opcao.lower() == "a" and posY > 0:
+                posY -= 1
+                if mapa[posX][posY] == "#":
+                    print("\nFoste contra um obstáculo, tenta novamente\n")
+                    posY += 1
+                else:
+                    mapa[posX][posY] = "R"
+            elif opcao.lower() == "d" and posY < 9:
+                posY += 1
+                if mapa[posX][posY] == "#":
+                    print("\nFoste contra um obstáculo, tenta novamente\n")
+                    posY -= 1
+                else:
+                    mapa[posX][posY] = "R"              
             elif opcao == "0":
                 print("Programa encerrado.")
                 break
             else:
-                print("Opção inválida. Tente novamente.")
+                print("\nOpção inválida. Tente novamente.\n")
                 menu()
+                
+            if mapa[posX][posY] == mapa[9][9]:
+                print("\n\nParabéns terminaste o jogo!!")
 #executa o menu
-menu()
+menu(ler_mapa("mapa.txt"))
