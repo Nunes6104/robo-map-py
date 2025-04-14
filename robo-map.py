@@ -19,7 +19,7 @@ def menu(mapa):
             for linha in mapa:
                 print(' '.join(linha))
             
-            print("\nEscolha uma opção W,A,S,D para mover o Robô \nOpção 0 para encerrar o programa")
+            print("\nEscolha uma opção W,A,S,D para mover o Robot \nOpção 0 para encerrar o programa")
             opcao = input("Escolha uma opção: ")
 
             if opcao.lower() == "w" and posX > 0:
@@ -56,9 +56,11 @@ def menu(mapa):
                 break
             else:
                 print("\nOpção inválida. Tente novamente.\n")
-                menu()
+                menu(mapa)
                 
             if mapa[posX][posY] == mapa[9][9]:
                 print("\n\nParabéns terminaste o jogo!!")
 #executa o menu
+print("O objetivo do jogo é chegar à saída no canto inferior direito\n")
 menu(ler_mapa("mapa.txt"))
+
