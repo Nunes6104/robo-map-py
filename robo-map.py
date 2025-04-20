@@ -24,7 +24,7 @@ def menu(mapa):
 
             if opcao.lower() == "w" and posX > 0:
                 posX -= 1
-                if mapa[posX][posY] == "#":
+                if mapa[posX][posY] == "#" or mapa[posX][posY] == "R":
                     print("\nFoste contra um obstáculo, tenta novamente1\n")
                     posX += 1
                 else:
@@ -32,21 +32,21 @@ def menu(mapa):
                     
             elif opcao.lower() == "s" and posX < 9:
                 posX += 1
-                if mapa[posX][posY] == "#":
+                if mapa[posX][posY] == "#" or mapa[posX][posY] == "R":
                     print("\nFoste contra um obstáculo, tenta novamente\n")
                     posX -= 1
                 else:
                     mapa[posX][posY] = "R"
             elif opcao.lower() == "a" and posY > 0:
                 posY -= 1
-                if mapa[posX][posY] == "#":
+                if mapa[posX][posY] == "#" or mapa[posX][posY] == "R":
                     print("\nFoste contra um obstáculo, tenta novamente\n")
                     posY += 1
                 else:
                     mapa[posX][posY] = "R"
             elif opcao.lower() == "d" and posY < 9:
                 posY += 1
-                if mapa[posX][posY] == "#":
+                if mapa[posX][posY] == "#" or mapa[posX][posY] == "R":
                     print("\nFoste contra um obstáculo, tenta novamente\n")
                     posY -= 1
                 else:
@@ -58,8 +58,8 @@ def menu(mapa):
                 print("\nOpção inválida. Tente novamente.\n")
                 menu(mapa)
                 
-            if mapa[posX][posY] == mapa[9][9]:
-                print("\n\nParabéns terminaste o jogo!!")
+        if mapa[posX][posY] == mapa[9][9]:
+            print("\n\nParabéns terminaste o jogo!!")
 #executa o menu
 print("O objetivo do jogo é chegar à saída no canto inferior direito\n")
 menu(ler_mapa("mapa.txt"))
